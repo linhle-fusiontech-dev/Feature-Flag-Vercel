@@ -9,9 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@flags-sdk/vercel": "^1.1.0",
+    "flags": "^4.0.5",
     "next": "16.1.7",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "tar": "^7.5.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
