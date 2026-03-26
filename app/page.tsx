@@ -11,6 +11,7 @@ export default async function Page() {
   const session = await getSession();
 
   const demoNumber = await demoNumberFlag();
+  
   const demoJson = await demoJsonFlag();
 
   return (
@@ -22,7 +23,7 @@ export default async function Page() {
       <div>String flag: {demoString}</div>
       <br />
       <div>Number flag: {demoNumber}</div>
-      <br />
+
       <pre>{JSON.stringify(demoJson, null, 2)}</pre>
     </>
   );

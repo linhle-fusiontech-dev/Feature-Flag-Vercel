@@ -3,13 +3,9 @@ import { UserDTO } from '@/app/dto/user.dto';
 import { vercelAdapter } from '@flags-sdk/vercel';
 import { flag } from 'flags/next';
 import { FlagEnum } from '@/app/keyFlag/key.flag';
+import { DemoJsonFlagValue } from '@/app/dto/demoJsonFlagValue.dto';
 
 const defaultValue = false;
-type DemoJsonFlagValue = {
-  id: string;
-  name: string;
-  phone: string;
-};
 
 const identify = async (): Promise<UserDTO> => {
   const session = await getSession();
