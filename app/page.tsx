@@ -1,5 +1,6 @@
 import { getSession } from "@/app/api/user.api";
 import { demoJsonFlag, demoNumberFlag, demoShowUIFlag, demoStringFlag, marketingBanner } from "@/app/flags";
+import { FlagEnum } from "@/app/keyFlag/key.flag";
 
 
 export default async function Page() {
@@ -16,15 +17,15 @@ export default async function Page() {
 
   return (
     <>
-      <div>{demoShowUI ? `Show DemoShowUI SUCCESS! - ${demoShowUI}` : `Show DemoShowUI FALSE! - ${demoShowUI}`}</div>
+      <div>"{FlagEnum.DEMO_SHOW_BOOLEAN}": {demoShowUI ? `Show DemoShowUI SUCCESS! - ${demoShowUI}` : `Show DemoShowUI FALSE! - ${demoShowUI}`}</div>
       <br />
-      <div>{showBanner ? 'Show banner success!' : `Show banner false (id:${session.user.id} - name: ${session.user.name})`}</div>
+      <div>"{FlagEnum.MARKETING_BANNER}": {showBanner ? 'Show banner success!' : `Show banner false (id:${session.user.id}": - name: ${session.user.name})`}</div>
       <br />
-      <div>String flag: {demoString}</div>
+      <div>"{FlagEnum.DEMO_STRING_FLAG}": String flag: {demoString}</div>
       <br />
-      <div>Number flag: {demoNumber}</div>
+      <div>"{FlagEnum.DEMO_NUMBER_FLAG}": Number flag: {demoNumber}</div>
 
-      <pre>{JSON.stringify(demoJson, null, 2)}</pre>
+      <pre>"{FlagEnum.DEMO_JSON_FLAG}": {JSON.stringify(demoJson, null, 2)}</pre>
     </>
   );
 }
