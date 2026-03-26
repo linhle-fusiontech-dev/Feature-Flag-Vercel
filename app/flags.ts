@@ -5,6 +5,11 @@ import { flag } from 'flags/next';
 import { FlagEnum } from '@/app/keyFlag/key.flag';
 
 const defaultValue = false;
+type DemoJsonFlagValue = {
+  id: string;
+  name: string;
+  phone: string;
+};
 
 const identify = async (): Promise<UserDTO> => {
   const session = await getSession();
@@ -13,11 +18,13 @@ const identify = async (): Promise<UserDTO> => {
   };
 };
 
-const handleSession = async () => {
-  const resUser = await getSession();
-  if (resUser?.user === null) return false;
-  return true;
-}
+export const demoShowUIFlag = flag({
+  key: FlagEnum.DEMO_SHOW_BOOLEAN,
+  adapter: vercelAdapter(),
+  defaultValue: defaultValue,
+  identify,
+});
+
 
 export const marketingBanner = flag({
   /** key */
@@ -32,11 +39,46 @@ export const marketingBanner = flag({
   //Flag chưa tồn tại
   //Lỗi runtime
   defaultValue: defaultValue,
-  /** decide */
-  // Cho phép bạn override logic flag trước khi gọi adapter
-  decide: handleSession,
   /** identify */
   //Dùng để gửi context (user, team, org…) lên Vercel
   //Đây là thứ quyết định rule có match hay không
+  identify,
+});
+
+
+export const demoStringFlag = flag<string, UserDTO>({
+  key: FlagEnum.DEMO_STRING_FLAG,
+  adapter: vercelAdapter(),
+  defaultValue: 'develop',
+  options: [{ value: 'develop', label: 'develop' }],
+  identify,
+});
+
+export const demoNumberFlag = flag<string, UserDTO>({
+  key: FlagEnum.DEMO_NUMBER_FLAG,
+  adapter: vercelAdapter(),
+  defaultValue: '1111',
+  options: [{ value: '1111', label: 'id' }],
+  identify,
+});
+
+export const demoJsonFlag = flag<DemoJsonFlagValue, UserDTO>({
+  key: FlagEnum.DEMO_JSON_FLAG,
+  adapter: vercelAdapter(),
+  defaultValue: {
+    id: '1',
+    name: 'Hung',
+    phone: '0342789876',
+  },
+  options: [
+    {
+      label: 'Variant 1',
+      value: {
+        id: '1',
+        name: 'Hung',
+        phone: '0342789876',
+      },
+    },
+  ],
   identify,
 });
